@@ -14,17 +14,16 @@ import java.util.List;
 @RequestMapping("/markets")
 public class MarketController {
     @GetMapping("/getProductsByCSVFile")
-    public List<Product> getProductFromMarket(String file)
-    { //log.info("getMarketProducts has started ...");
+    public List<Product> getProductFromMarket(String file) { //log.info("getMarketProducts has started ...");
 
-        MarketService service=new MarketService();
-        List<Product>marketProducts=service.getProducts(file);
+        MarketService service = new MarketService();
+        List<Product> marketProducts = service.getProducts(file);
         return marketProducts;
     }
+
     @GetMapping("/getAllProduct")
-    public List<Product> getAllProductFromAllMarkets()
-    {
-       List<Product>allProducts=MarketService.readAllCSVTest();
-       return allProducts;
+    public List<Product> getAllProductFromAllMarkets() {
+        List<Product> allProducts = MarketService.readAllCSVTest();
+        return allProducts;
     }
 }
