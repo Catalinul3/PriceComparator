@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/markets")
 public class MarketController {
-    @GetMapping("/getAllProducts")
+    @GetMapping("/getProductsByCSVFile")
     public List<Product> getProductFromMarket(String file)
     { //log.info("getMarketProducts has started ...");
 
@@ -21,8 +21,8 @@ public class MarketController {
         List<Product>marketProducts=service.getProducts(file);
         return marketProducts;
     }
-    @GetMapping("/testCSV")
-    public List<Product> TestCSV()
+    @GetMapping("/getAllProduct")
+    public List<Product> getAllProductFromAllMarkets()
     {
        List<Product>allProducts=MarketService.readAllCSVTest();
        return allProducts;
