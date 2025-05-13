@@ -14,6 +14,7 @@ public class Product {
    private String unit;
    private float price;
    private String currency;
+   private String store;
 
 
 }

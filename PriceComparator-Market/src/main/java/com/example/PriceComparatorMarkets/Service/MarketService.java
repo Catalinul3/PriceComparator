@@ -18,8 +18,8 @@ public class MarketService {
         Path relativePath = Paths.get("src/main/java/com/example/PriceComparatorMarkets/DataStores");
         Path absolutePath = relativePath.toAbsolutePath();
         Path filePath = absolutePath.resolve(file);
-
-        List< Product>marketProduct=CSVFileHelpers.loadProduct(filePath.toString());
+        String title=CSVFileHelpers.spliter(file);
+        List< Product>marketProduct=CSVFileHelpers.loadProduct(filePath.toString(),title);
  return marketProduct;
     }
     public static List<Product> readAllCSVTest()

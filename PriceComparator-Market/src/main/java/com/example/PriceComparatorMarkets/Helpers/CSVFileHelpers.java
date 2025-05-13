@@ -22,14 +22,20 @@ public class CSVFileHelpers {
         {List<Product>currentStore=new ArrayList<Product>();
             if(fileEntry.getName().contains(".csv"))
             {Path filePath = absolutePath.resolve(fileEntry.getName());
-                currentStore=loadProduct(filePath.toString());
+                String title=spliter(fileEntry.getName());//obtain store name
+                currentStore=loadProduct(filePath.toString(),title);
                 products.addAll(currentStore);
             }
         }
         return products;
 
     }
-    public static List<Product> loadProduct(String file) {
+    public static String spliter(String title)
+    {
+        String[] splitString=title.split("_");
+        return splitString[0];
+    }
+    public static List<Product> loadProduct(String file,String title) {
  List<Product>marketProduct=new ArrayList<Product>();
         try {
             FileReader fileReader=new FileReader(file);
@@ -51,6 +57,7 @@ public class CSVFileHelpers {
                     product.setUnit(splitCell[5]);
                     product.setPrice(Float.parseFloat(splitCell[6]));
                     product.setCurrency(splitCell[7]);
+                    product.setStore(title);
                  marketProduct.add(product);
                 }
                 System.out.println();

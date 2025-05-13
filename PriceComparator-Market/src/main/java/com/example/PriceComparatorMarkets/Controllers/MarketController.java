@@ -24,7 +24,7 @@ public class MarketController {
     @GetMapping("/testCSV")
     public List<Product> TestCSV()
     {
-       List<Product>allProoducts=MarketService.readAllCSVTest();
-       return allProoducts;
+       List<Product>allProducts=MarketService.readAllCSVTest();
+       return allProducts;
     }
 }
