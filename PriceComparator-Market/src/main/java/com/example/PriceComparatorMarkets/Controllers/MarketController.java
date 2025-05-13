@@ -13,12 +13,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/markets")
 public class MarketController {
-    @GetMapping("/validate{file}")
+    @GetMapping("/getAllProducts")
     public List<Product> getProductFromMarket(String file)
     { //log.info("getMarketProducts has started ...");
 
         MarketService service=new MarketService();
         List<Product>marketProducts=service.getProducts(file);
         return marketProducts;
+    }
+    @GetMapping("/testCSV")
+    public List<Product> TestCSV()
+    {
+       List<Product>allProoducts=MarketService.readAllCSVTest();
+       return allProoducts;
     }
 }

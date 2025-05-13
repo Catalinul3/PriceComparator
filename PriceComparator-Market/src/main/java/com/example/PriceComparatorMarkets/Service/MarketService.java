@@ -22,4 +22,9 @@ public class MarketService {
         List< Product>marketProduct=CSVFileHelpers.loadProduct(filePath.toString());
  return marketProduct;
     }
+    public static List<Product> readAllCSVTest()
+    {
+        List<Product>allProducts= CSVFileHelpers.readAllCSVFile();
+        return allProducts;
+    }
 }
