@@ -1,26 +1,24 @@
 package com.example.PriceComparatorMarkets.Helpers;
 
-import com.example.PriceComparatorMarkets.DAO.Product;
-import com.opencsv.CSVReader;
+import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
+import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 
 import java.io.File;
-import java.io.FileReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CSVFileHelpers {
-    public static List<Product> readAllCSVFile() {
-        List<Product> products = new ArrayList<Product>();
+    public static List<RegularProduct> readAllRegularProducts() {
+        List<RegularProduct> products = new ArrayList<RegularProduct>();
         Path relativePath = Paths.get("src/main/java/com/example/PriceComparatorMarkets/DataStores");
         Path absolutePath = relativePath.toAbsolutePath();
 
         final File folder = new File(absolutePath.toString());
         for (final File fileEntry : folder.listFiles()) {
-            List<Product> currentStore = new ArrayList<Product>();
-            CSVParser currentFile = new CSVParser();
+            List<RegularProduct> currentStore = new ArrayList<RegularProduct>();
+            CSVParserCustom currentFile = new CSVParserCustom();
             if (fileEntry.getName().contains(".csv")) {
                 Path filePath = absolutePath.resolve(fileEntry.getName());
                 String title = StringHelper.spliter(fileEntry.getName());//obtain store name
@@ -30,5 +28,24 @@ public class CSVFileHelpers {
         }
         return products;
 
+    }
+    public static List<ProductDiscount>  readAllDiscountProducts()
+    {
+        List<ProductDiscount> products = new ArrayList<ProductDiscount>();
+        Path relativePath = Paths.get("src/main/java/com/example/PriceComparatorMarkets/DataDiscountStores");
+        Path absolutePath = relativePath.toAbsolutePath();
+
+        final File folder = new File(absolutePath.toString());
+        for (final File fileEntry : folder.listFiles()) {
+            List<ProductDiscount> currentStore = new ArrayList<ProductDiscount>();
+            CSVParserCustom currentFile = new CSVParserCustom();
+            if (fileEntry.getName().contains(".csv")) {
+                Path filePath = absolutePath.resolve(fileEntry.getName());
+                String title = StringHelper.spliter(fileEntry.getName());//obtain store name
+                currentStore = currentFile.loadDiscount(filePath.toString(), title);
+                products.addAll(currentStore);
+            }
+        }
+        return products;
     }
 }
