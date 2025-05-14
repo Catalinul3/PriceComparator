@@ -1,5 +1,6 @@
 package com.example.PriceComparatorMarkets.Service;
 
+import com.example.PriceComparatorMarkets.BusinessLogic.DiscountsOperations;
 import com.example.PriceComparatorMarkets.DAO.Product;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
@@ -10,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -43,6 +41,16 @@ public List<String> getFromDataDay()
 
     }
     return strings;
+}
+public List<ProductDiscount>getActiveDiscounts()
+{
+    List<ProductDiscount>activeDiscounts=DiscountsOperations.activeDiscounts();
+    return activeDiscounts;
+}
+public List<ProductDiscount>getBestActiveDiscounts()
+{
+    List<ProductDiscount>bestActivDiscount= DiscountsOperations.currentBestActiveDiscount();
+    return bestActivDiscount;
 }
     public static List<RegularProduct> readAllRegularProducts() {
         List<RegularProduct> allProducts = CSVFileHelpers.readAllRegularProducts();

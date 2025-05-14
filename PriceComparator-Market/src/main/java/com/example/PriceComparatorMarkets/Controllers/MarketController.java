@@ -10,19 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @Log4j2
 @RestController
 @RequestMapping("/markets")
 public class MarketController {
+    MarketService service;
+    public MarketController()
+    {
+        service=new MarketService();
+    }
     @GetMapping("/getProductsByCSVFile")
     public List<RegularProduct> getProductFromMarket(String file) { //log.info("getMarketProducts has started ...");
 
-        MarketService service = new MarketService();
+
         List<RegularProduct> marketProducts = service.getProducts(file);
         return marketProducts;
     }
-
+@GetMapping("/geActivetDiscount")
+public List<ProductDiscount> getActiveDiscount()
+{
+    List<ProductDiscount> discounts=service.getActiveDiscounts();
+    return discounts;
+}
     @GetMapping("/getAllProduct")
     public List<RegularProduct> getAllProductFromAllMarkets() {
         List<RegularProduct> allProducts = MarketService.readAllRegularProducts();
@@ -31,7 +42,7 @@ public class MarketController {
 
     @GetMapping("/searchItemsByName")
     public List<Product>searchItemByName(String name){
-        MarketService service = new MarketService();
+
         List<Product> searchItems = service.getProductByName(name);
         return searchItems;
     }
@@ -41,13 +52,12 @@ public class MarketController {
         List<ProductDiscount>allDiscounts=MarketService.readAllDiscountProducts();
         return  allDiscounts;
     }
-    @GetMapping("/testConversionToLocalDate")
+    @GetMapping("/bestCurrentActiveDiscount")
 
-        public List<String>testLocalDate()
+        public List<ProductDiscount>getBestCurrentActiveDiscount()
         {
-            MarketService service=new MarketService();
-            List<String>days=service.getFromDataDay();
-            return days;
+            List<ProductDiscount> discounts=service.getBestActiveDiscounts();
+            return discounts;
         }
     }
 
