@@ -1,7 +1,7 @@
 package com.example.PriceComparatorMarkets.Service;
 
-import com.example.PriceComparatorMarkets.BusinessLogic.DiscountsOperations;
-import com.example.PriceComparatorMarkets.DAO.Product;
+import com.example.PriceComparatorMarkets.BusinessLogic.ActiveDiscount;
+import com.example.PriceComparatorMarkets.BusinessLogic.NewDiscount;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.CSVFileHelpers;
@@ -17,11 +17,11 @@ import java.util.*;
 @Service
 public class MarketService {
     private List<RegularProduct> products;
-    private List<ProductDiscount>discounts;
+    private List<ProductDiscount> discounts;
 
     public MarketService() {
         products = CSVFileHelpers.readAllRegularProducts();
-        discounts=CSVFileHelpers.readAllDiscountProducts();
+        discounts = CSVFileHelpers.readAllDiscountProducts();
     }
 
     public List<RegularProduct> getProducts(String file) {
@@ -33,45 +33,33 @@ public class MarketService {
         List<RegularProduct> marketProduct = csv.loadProducts(filePath.toString(), title);
         return marketProduct;
     }
-public List<String> getFromDataDay()
-{List<String>strings=new LinkedList<String>();
-    for(ProductDiscount p: discounts)
-    {
-        strings.add(p.getFromDate().getDayOfWeek().toString());
 
+    public List<ProductDiscount> getActiveDiscounts() {
+        ActiveDiscount active=new ActiveDiscount();
+        List<ProductDiscount> activeDiscounts =active.typeDiscount();
+        return activeDiscounts;
     }
-    return strings;
-}
-public List<ProductDiscount>getActiveDiscounts()
-{
-    List<ProductDiscount>activeDiscounts=DiscountsOperations.activeDiscounts();
-    return activeDiscounts;
-}
-public List<ProductDiscount>getBestActiveDiscounts()
-{
-    List<ProductDiscount>bestActivDiscount= DiscountsOperations.currentBestActiveDiscount();
-    return bestActivDiscount;
-}
+    public List<ProductDiscount>getNewlyDiscounts(){
+        NewDiscount news=new NewDiscount();
+        List<ProductDiscount>newDiscounts=news.typeDiscount();
+        return newDiscounts;
+    }
+
+    public List<ProductDiscount> getBestActiveDiscounts() {
+        ActiveDiscount active=new ActiveDiscount();
+        List<ProductDiscount> bestActivDiscount = active.currentBestActiveDiscount();
+        return bestActivDiscount;
+    }
+
     public static List<RegularProduct> readAllRegularProducts() {
         List<RegularProduct> allProducts = CSVFileHelpers.readAllRegularProducts();
         return allProducts;
     }
-    public static List<ProductDiscount>readAllDiscountProducts(){
-        List<ProductDiscount>allDiscounts=CSVFileHelpers.readAllDiscountProducts();
+
+    public static List<ProductDiscount> readAllDiscountProducts() {
+        List<ProductDiscount> allDiscounts = CSVFileHelpers.readAllDiscountProducts();
         return allDiscounts;
     }
 
-    public List<Product> getProductByName(String name) {
-        List<Product> searchProducts = new ArrayList<Product>();
-        if (name.isBlank()) {
-            return null;
-        } else {
-            for (Product product : products) {
-                if (product.getProductName().contains(name)) {
-                    searchProducts.add(product);
-                }
-            }
-        }
-        return searchProducts;
-    }
+
 }

@@ -1,17 +1,17 @@
 package com.example.PriceComparatorMarkets.BusinessLogic;
 
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
-import com.example.PriceComparatorMarkets.Helpers.CSVFileHelpers;
 import com.example.PriceComparatorMarkets.Helpers.PercentageComparator;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DiscountsOperations {
-    public static List<ProductDiscount> activeDiscounts() {
-        List<ProductDiscount> allDiscountProducts = CSVFileHelpers.readAllDiscountProducts();//We read all discounts for compare data and time when the item has been reduced
+public class ActiveDiscount extends Discount implements IDiscounts {
+
+    @Override
+    public List<ProductDiscount> typeDiscount() {
         List<ProductDiscount> currentDiscounts = new ArrayList<ProductDiscount>();
-        LocalDate today = LocalDate.now();
+
         for (ProductDiscount product : allDiscountProducts) {
 //check if today is between reduced dates
             if (today.isAfter(product.getFromDate()) && (today.isEqual(product.getToDate()) || today.isBefore(product.getToDate()))) {
@@ -22,10 +22,9 @@ public class DiscountsOperations {
         return currentDiscounts;
     }
 
-    public static List<ProductDiscount> currentBestActiveDiscount() {
-        List<ProductDiscount> allDiscountProducts = CSVFileHelpers.readAllDiscountProducts();
+    public  List<ProductDiscount> currentBestActiveDiscount() {
+
         List<ProductDiscount> highestDiscounts = new ArrayList<ProductDiscount>();
-        LocalDate today = LocalDate.now();
         int max = Integer.MIN_VALUE;
         for (ProductDiscount product : allDiscountProducts) {
             if (!today.isAfter(product.getToDate()) && !today.isBefore(product.getFromDate())) {
@@ -44,3 +43,4 @@ public class DiscountsOperations {
         return highestDiscounts;
     }
 }
+
