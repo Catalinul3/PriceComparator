@@ -1,6 +1,7 @@
 package com.example.PriceComparatorMarkets.Service;
 
 import com.example.PriceComparatorMarkets.BusinessLogic.ActiveDiscount;
+import com.example.PriceComparatorMarkets.BusinessLogic.DailyBaskets;
 import com.example.PriceComparatorMarkets.BusinessLogic.NewDiscount;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
@@ -35,18 +36,19 @@ public class MarketService {
     }
 
     public List<ProductDiscount> getActiveDiscounts() {
-        ActiveDiscount active=new ActiveDiscount();
-        List<ProductDiscount> activeDiscounts =active.typeDiscount();
+        ActiveDiscount active = new ActiveDiscount();
+        List<ProductDiscount> activeDiscounts = active.typeDiscount();
         return activeDiscounts;
     }
-    public List<ProductDiscount>getNewlyDiscounts(){
-        NewDiscount news=new NewDiscount();
-        List<ProductDiscount>newDiscounts=news.typeDiscount();
+
+    public List<ProductDiscount> getNewlyDiscounts() {
+        NewDiscount news = new NewDiscount();
+        List<ProductDiscount> newDiscounts = news.typeDiscount();
         return newDiscounts;
     }
 
     public List<ProductDiscount> getBestActiveDiscounts() {
-        ActiveDiscount active=new ActiveDiscount();
+        ActiveDiscount active = new ActiveDiscount();
         List<ProductDiscount> bestActivDiscount = active.currentBestActiveDiscount();
         return bestActivDiscount;
     }
@@ -59,6 +61,21 @@ public class MarketService {
     public static List<ProductDiscount> readAllDiscountProducts() {
         List<ProductDiscount> allDiscounts = CSVFileHelpers.readAllDiscountProducts();
         return allDiscounts;
+    }
+
+    public List<RegularProduct> computeUserBasket(String[] productsName) {
+        List<RegularProduct> basket = DailyBaskets.bestDeal(productsName, products);
+        return basket;
+    }
+
+    public List<RegularProduct> computeUserBasketWithBasedProduct(String[] productsName) {
+        List<RegularProduct> basket = DailyBaskets.computeBasketWithBasedProduct(productsName, products);
+        return basket;
+    }
+    public List<RegularProduct>optimizeShoppingList(String[]productsName)
+    {
+        List<RegularProduct>optimizedList=DailyBaskets.optimizedList(productsName,products);
+        return optimizedList;
     }
 
 

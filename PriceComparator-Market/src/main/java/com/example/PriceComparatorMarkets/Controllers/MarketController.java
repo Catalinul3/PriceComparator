@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @RestController
@@ -57,6 +58,24 @@ public class MarketController {
     {
         List<ProductDiscount>newDiscount= service.getNewlyDiscounts();
         return newDiscount;
+    }
+    @GetMapping("/userBasket")
+    public List<RegularProduct> getUserBasket(String[] items)
+    {
+        List<RegularProduct>basket=service.computeUserBasket(items);
+        return basket;
+    }
+    @GetMapping("/userBasketWithBaseProduct")
+    public List<RegularProduct>getUserBasketWithBaseProduct(String[] items)
+    {
+        List<RegularProduct>basket=service.computeUserBasketWithBasedProduct(items);
+        return basket;
+    }
+    @GetMapping("/userOptimizeShoppingList")
+    public List<RegularProduct>optimizeList(String[] items)
+    {
+        List<RegularProduct>list=service.optimizeShoppingList(items);
+        return list;
     }
 
 }
