@@ -1,7 +1,7 @@
-package com.example.PriceComparatorMarkets.BusinessLogic;
+package com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations;
 
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
-import com.example.PriceComparatorMarkets.Helpers.CSVFileHelpers;
+import com.example.PriceComparatorMarkets.Helpers.CSVHelpers.CSVFileHelpers;
 
 import java.time.LocalDate;
 import java.util.List;

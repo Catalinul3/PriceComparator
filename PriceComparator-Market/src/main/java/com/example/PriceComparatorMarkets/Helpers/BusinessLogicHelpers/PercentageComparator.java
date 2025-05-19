@@ -1,4 +1,4 @@
-package com.example.PriceComparatorMarkets.Helpers;
+package com.example.PriceComparatorMarkets.Helpers.BusinessLogicHelpers;
 
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 

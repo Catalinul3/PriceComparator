@@ -1,7 +1,8 @@
-package com.example.PriceComparatorMarkets.Helpers;
+package com.example.PriceComparatorMarkets.Helpers.CSVHelpers;
 
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
+import com.example.PriceComparatorMarkets.Helpers.StringHelper;
 
 import java.io.File;
 import java.nio.file.Path;

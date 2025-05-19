@@ -1,0 +1,11 @@
+product_id;product_name;brand;package_quantity;package_unit;product_category;from_date;to_date;percentage_of_discount
+P001;lapte zuzu;Zuzu;1;l;lactate;2025-05-15;2025-05-17;15
+P003;iaurt grecesc;Olympus;0.35;kg;lactate;2025-05-16;2025-05-18;20
+P012;pâine albă;K-Classic;450;g;panificație;2025-05-15;2025-05-16;10
+P020;spaghetti nr.5;Barilla;400;g;paste făinoase;2025-05-17;2025-05-18;25
+P025;apă plată;Dorna;1.5;l;băuturi;2025-05-15;2025-05-17;12
+P029;ulei floarea-soarelui;Floriol;0.9;l;alimente de bază;2025-05-16;2025-05-18;18
+P032;biscuiți cu unt;Milka;180;g;gustări;2025-05-15;2025-05-18;22
+P041;șampon păr gras;Elseve;500;ml;îngrijire personală;2025-05-15;2025-05-17;30
+P050;vin alb demisec;Recas;0.75;l;băuturi;2025-05-16;2025-05-18;35
+P067;pasta de dinti 3D White;Colgate;75;ml;îngrijire personală;2025-05-15;2025-05-16;20

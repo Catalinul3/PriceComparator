@@ -1,11 +1,11 @@
-package com.example.PriceComparatorMarkets.Helpers;
+package com.example.PriceComparatorMarkets.Helpers.CSVHelpers;
 
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
+import com.example.PriceComparatorMarkets.Helpers.Parser;
 import com.opencsv.CSVReader;
 
 import java.io.FileReader;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;

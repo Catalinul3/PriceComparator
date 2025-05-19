@@ -1,0 +1,11 @@
+product_id;product_name;brand;package_quantity;package_unit;product_category;from_date;to_date;percentage_of_discount
+P006;ouă mărimea M;Ferma Veche;12;buc;ouă;2025-05-18;2025-05-20;15
+P015;roșii cherry;K-Bio;300;g;legume și fructe;2025-05-19;2025-05-22;25
+P018;piept pui;Agricola;0.8;kg;carne;2025-05-18;2025-05-21;20
+P022;zahăr tos;Mărgăritar;1;kg;alimente de bază;2025-05-19;2025-05-21;12
+P030;sandwich cu pâine;Profi;1;buc;produse alimentare;2025-05-18;2025-05-22;18
+P035;cafea măcinată;Jacobs;0.2;kg;cafea;2025-05-19;2025-05-22;30
+P044;hârtie igienică 3 straturi;Pufina;8;role;produse de menaj;2025-05-20;2025-05-22;17
+P053;ciocolată neagră 70%;Heidi;80;g;gustări;2025-05-18;2025-05-20;22
+P056;cartofi albi;Generic;1.5;kg;legume și fructe;2025-05-19;2025-05-21;14
+P072;bere blondă;Ursus;0.5;l;băuturi;2025-05-20;2025-05-22;27

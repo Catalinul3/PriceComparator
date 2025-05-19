@@ -1,7 +1,7 @@
-package com.example.PriceComparatorMarkets.BusinessLogic;
+package com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations;
 
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
-import com.example.PriceComparatorMarkets.Helpers.PercentageComparator;
+import com.example.PriceComparatorMarkets.Helpers.BusinessLogicHelpers.PercentageComparator;
 
 import java.util.ArrayList;
 import java.util.List;

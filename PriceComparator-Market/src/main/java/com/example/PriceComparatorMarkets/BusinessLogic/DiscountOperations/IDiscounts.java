@@ -1,4 +1,4 @@
-package com.example.PriceComparatorMarkets.BusinessLogic;
+package com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations;
 
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 
