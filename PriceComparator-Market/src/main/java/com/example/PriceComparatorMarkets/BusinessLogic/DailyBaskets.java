@@ -1,6 +1,7 @@
 package com.example.PriceComparatorMarkets.BusinessLogic;
 
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
+import com.example.PriceComparatorMarkets.Helpers.Parser;
 import com.example.PriceComparatorMarkets.Helpers.StringHelper;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -33,7 +34,7 @@ public class DailyBaskets {
         RegularProduct cheapest = new RegularProduct();
         float min = Float.MAX_VALUE;
         for (RegularProduct cheap : allProduct) {
-            if (product.equals(StringHelper.firstString(StringHelper.normalize(cheap.getProductName())))) {
+            if (product.toLowerCase().equals(StringHelper.firstString(StringHelper.normalize(cheap.getProductName())))) {
                 if (cheap.getPrice() < min) {
                     cheapest = cheap;
                     min = cheap.getPrice();
@@ -42,30 +43,50 @@ public class DailyBaskets {
         }
         return cheapest;
     }
-
-    public static List<RegularProduct> bestDeal(String[] productsName, List<RegularProduct> allProducts) {
+public static Map<String,RegularProduct>highlightBestDealAcrossAllMarkets(List<RegularProduct>allProducts)
+{
+    Map<String,RegularProduct>bestDeals=allProducts.stream().
+            collect(Collectors.toMap(
+                    RegularProduct::getProductName,
+                    product -> product,
+                    (oldDeal,newDeal)->{
+                        float oldPricePerUnit=pricePerUnit(oldDeal);
+                        float newPricePerUnit=pricePerUnit(newDeal);
+                        return (oldPricePerUnit<newPricePerUnit)?oldDeal:newDeal;
+                    }
+            ));
+    return bestDeals;
+}
+    public static Map<String,RegularProduct> bestDeal(String[] productsName, List<RegularProduct> allProducts) {
         List<RegularProduct> basket = computeBasketWithBasedProduct(productsName, allProducts);
-        Map<String, Float> bestDeal = basket.stream().collect(Collectors.toMap(
+
+        /*keep the product with cheapest pricePerUnit*/
+
+        Map<String,RegularProduct> bestDeal = basket.stream().collect(Collectors.toMap(
                 RegularProduct::getProductName,
-                product -> pricePerUnit(product.getPackageQuantity(), product.getUnit(), product.getPrice()),
-                (oldDeal, newDeal) -> Math.min(oldDeal, newDeal))
-        );
-        return basket;
+                product -> product,
+                (oldDeal, newDeal) -> {
+                    float oldPrice=pricePerUnit(oldDeal);
+                    float newPrice=pricePerUnit(newDeal);
+                    return (oldPrice<newPrice)?oldDeal:newDeal;
+                }
+        ));
+        return bestDeal;
 
     }
 
 
-    public static float pricePerUnit(float quantity, String unit, float price) {
+    public static float pricePerUnit(RegularProduct product) {
         float pricePerUnit = 0f;
-        switch (unit) {
+        switch (product.getUnit()) {
             case "ml":
-                pricePerUnit = price / (quantity / 1000);
+                pricePerUnit = product.getPrice() / (product.getPackageQuantity() / 1000);
                 break;
             case "g":
-                pricePerUnit = price / (quantity / 1000);
+                pricePerUnit = product.getPrice() / (product.getPackageQuantity() / 1000);
                 break;
             case "kg", "l", "buc":
-                pricePerUnit = price / quantity;
+                pricePerUnit = product.getPrice() / product.getPackageQuantity();
                 break;
         }
         return pricePerUnit;

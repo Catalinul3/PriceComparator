@@ -63,9 +63,9 @@ public class MarketService {
         return allDiscounts;
     }
 
-    public List<RegularProduct> computeUserBasket(String[] productsName) {
-        List<RegularProduct> basket = DailyBaskets.bestDeal(productsName, products);
-        return basket;
+    public Map<String,RegularProduct> findBestDealPerUnit(String[] productsName) {
+         Map<String,RegularProduct>bestDeal = DailyBaskets.bestDeal(productsName, products);
+        return bestDeal;
     }
 
     public List<RegularProduct> computeUserBasketWithBasedProduct(String[] productsName) {
@@ -76,6 +76,10 @@ public class MarketService {
     {
         List<RegularProduct>optimizedList=DailyBaskets.optimizedList(productsName,products);
         return optimizedList;
+    }
+    public Map<String,RegularProduct>highlightBestDealProductService() {
+        Map<String, RegularProduct> bestDeal = DailyBaskets.highlightBestDealAcrossAllMarkets(products);
+    return bestDeal;
     }
 
 

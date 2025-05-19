@@ -60,9 +60,9 @@ public class MarketController {
         return newDiscount;
     }
     @GetMapping("/userBasket")
-    public List<RegularProduct> getUserBasket(String[] items)
+    public Map<String,RegularProduct> getUserBasket(String[] items)
     {
-        List<RegularProduct>basket=service.computeUserBasket(items);
+        Map<String,RegularProduct>basket=service.findBestDealPerUnit(items);
         return basket;
     }
     @GetMapping("/userBasketWithBaseProduct")
@@ -70,6 +70,12 @@ public class MarketController {
     {
         List<RegularProduct>basket=service.computeUserBasketWithBasedProduct(items);
         return basket;
+    }
+    @GetMapping("/highlightBestDeals")
+    public Map<String,RegularProduct>highlightBestProducts()
+    {
+        Map<String,RegularProduct>bestDeals=service.highlightBestDealProductService();
+        return bestDeals;
     }
     @GetMapping("/userOptimizeShoppingList")
     public List<RegularProduct>optimizeList(String[] items)
