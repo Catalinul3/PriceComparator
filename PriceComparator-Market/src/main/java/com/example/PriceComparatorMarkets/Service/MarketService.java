@@ -27,8 +27,8 @@ public class MarketService {
     public MarketService() {
         products = CSVFileHelpers.readAllRegularProducts();
         discounts = CSVFileHelpers.readAllDiscountProducts();
-    basket=new BasketProduct();
-    basketBaseProduct=new BasketBaseProduct();
+        basket = new BasketProduct();
+        basketBaseProduct = new BasketBaseProduct();
     }
 
     public List<RegularProduct> getProducts(String file) {
@@ -59,6 +59,11 @@ public class MarketService {
         return bestActivDiscount;
     }
 
+    public static List<RegularProduct> getCurrentCatalog() {
+        List<RegularProduct> currentProduct = CSVFileHelpers.findProductOnActualDate();
+        return currentProduct;
+    }
+
     public static List<RegularProduct> readAllRegularProducts() {
         List<RegularProduct> allProducts = CSVFileHelpers.readAllRegularProducts();
         return allProducts;
@@ -69,9 +74,9 @@ public class MarketService {
         return allDiscounts;
     }
 
-    public Map<String,RegularProduct> findBestDealPerUnit(String[] productsName) {
+    public Map<String, RegularProduct> findBestDealPerUnit(String[] productsName) {
 
-         Map<String,RegularProduct>bestDeal = basket.bestDeal(productsName, products);
+        Map<String, RegularProduct> bestDeal = basket.bestDeal(productsName, products);
         return bestDeal;
     }
 
@@ -80,17 +85,18 @@ public class MarketService {
         List<RegularProduct> basedProduct = basketBaseProduct.computeBasket(productsName, products);
         return basedProduct;
     }
-    public List<RegularProduct>optimizeShoppingList(String[]productsName)
-    {
-        List<RegularProduct>optimizedList= BasketProduct.optimizedList(productsName,products);
+
+    public List<RegularProduct> optimizeShoppingList(String[] productsName) {
+        List<RegularProduct> optimizedList = BasketProduct.optimizedList(productsName, products);
         return optimizedList;
     }
-    public Map<String,RegularProduct>highlightBestDealProductService() {
+
+    public Map<String, RegularProduct> highlightBestDealProductService() {
         Map<String, RegularProduct> bestDeal = BasketProduct.highlightBestDealAcrossAllMarkets(products);
-    return bestDeal;
+        return bestDeal;
     }
-  public void CreateAlert(String productName, int target)
-  {
-      UserAlertActions.CreateAlert(productName,target);
-  }
+
+    public void CreateAlert(String productName, int target) {
+        UserAlertActions.CreateAlert(productName, target);
+    }
 }

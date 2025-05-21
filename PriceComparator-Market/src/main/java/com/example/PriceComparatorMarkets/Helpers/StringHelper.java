@@ -11,14 +11,15 @@ public class StringHelper {
     public static LocalDate getData(String title)
     {
         String[] splitString=title.split("_");
+
         LocalDate date=LocalDate.MIN;
         if(splitString.length==2)//it means store csv files
-        {
-            date=LocalDate.parse(splitString[1]);
+        {String[] splitCSV=splitString[1].split(".csv");
+            date=LocalDate.parse(splitCSV[0]);
         }
         else //discount csv files
-        {
-            date= LocalDate.parse(splitString[2]);
+        {String[] splitCSV=splitString[2].split(".csv");
+            date= LocalDate.parse(splitCSV[0]);
         }
         return date;
     }

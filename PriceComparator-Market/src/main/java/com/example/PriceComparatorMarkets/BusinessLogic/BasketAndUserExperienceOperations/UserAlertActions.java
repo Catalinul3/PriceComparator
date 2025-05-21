@@ -29,7 +29,7 @@ public class UserAlertActions {
 
     }
     @Scheduled(cron = "0 0 0 * * *")
-    public static void createAlert(String userName, String productName, int target) {
+    public static void createAlert(String productName, int target) {
 
     }
 

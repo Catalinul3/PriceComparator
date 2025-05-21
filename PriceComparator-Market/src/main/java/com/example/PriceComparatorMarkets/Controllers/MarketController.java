@@ -86,6 +86,12 @@ public class MarketController {
     {
         service.CreateAlert(productName,target);
     }
+    @GetMapping("/getCurrentCatalog")
+    public List<RegularProduct>currentMarket()
+    {
+        List<RegularProduct>list= MarketService.getCurrentCatalog();
+        return list;
+    }
 
 }
 
