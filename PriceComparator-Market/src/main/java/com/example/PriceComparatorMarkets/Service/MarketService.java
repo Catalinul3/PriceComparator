@@ -1,6 +1,7 @@
 package com.example.PriceComparatorMarkets.Service;
 
 import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.BasketBaseProduct;
+import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlertActions;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.ActiveDiscount;
 import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.BasketProduct;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.NewDiscount;
@@ -88,6 +89,8 @@ public class MarketService {
         Map<String, RegularProduct> bestDeal = BasketProduct.highlightBestDealAcrossAllMarkets(products);
     return bestDeal;
     }
-
-
+  public void CreateAlert(String productName, int target)
+  {
+      UserAlertActions.CreateAlert(productName,target);
+  }
 }

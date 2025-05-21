@@ -1,12 +1,26 @@
 package com.example.PriceComparatorMarkets.Helpers;
 
-import javax.print.DocFlavor;
 import java.text.Normalizer;
+import java.time.LocalDate;
 
 public class StringHelper {
     public static String spliter(String title) {
         String[] splitString = title.split("_");
         return splitString[0];
+    }
+    public static LocalDate getData(String title)
+    {
+        String[] splitString=title.split("_");
+        LocalDate date=LocalDate.MIN;
+        if(splitString.length==2)//it means store csv files
+        {
+            date=LocalDate.parse(splitString[1]);
+        }
+        else //discount csv files
+        {
+            date= LocalDate.parse(splitString[2]);
+        }
+        return date;
     }
     public static String normalize(String name)
     {

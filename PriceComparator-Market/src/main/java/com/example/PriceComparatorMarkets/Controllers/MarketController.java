@@ -4,9 +4,7 @@ import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Service.MarketService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -82,6 +80,11 @@ public class MarketController {
     {
         List<RegularProduct>list=service.optimizeShoppingList(items);
         return list;
+    }
+    @PostMapping("/createNewAlert")
+    public void createAlert(String productName, int target)
+    {
+        service.CreateAlert(productName,target);
     }
 
 }
