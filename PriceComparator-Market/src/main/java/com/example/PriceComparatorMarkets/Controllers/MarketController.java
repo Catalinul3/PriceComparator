@@ -92,6 +92,11 @@ public class MarketController {
         List<RegularProduct>list= MarketService.getCurrentCatalog();
         return list;
     }
+    @GetMapping("/testNotify")
+    public void notifyU()
+    {
+        service.testAlert();
+    }
 
 }
 

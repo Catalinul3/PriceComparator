@@ -1,6 +1,7 @@
 package com.example.PriceComparatorMarkets.Service;
 
 import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.BasketBaseProduct;
+import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlert;
 import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlertActions;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.ActiveDiscount;
 import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.BasketProduct;
@@ -98,5 +99,10 @@ public class MarketService {
 
     public void CreateAlert(String productName, int target) {
         UserAlertActions.CreateAlert(productName, target);
+    }
+    public void testAlert()
+    {
+        UserAlertActions ua=new UserAlertActions();
+        ua.notifyUser();
     }
 }
