@@ -1,13 +1,14 @@
 package com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations;
 
-import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 @Getter
 @Setter
-public class UserAlert {
-String productName;
-float target;
+public class Graph {
+    private float price;
+    private LocalDate date;
+    private String store;
 
 }

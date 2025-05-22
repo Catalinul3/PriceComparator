@@ -1,11 +1,9 @@
 package com.example.PriceComparatorMarkets.Service;
 
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.BasketBaseProduct;
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlert;
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlertActions;
+import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.*;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.ActiveDiscount;
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.BasketProduct;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.NewDiscount;
+import com.example.PriceComparatorMarkets.DAO.GraphProduct;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.CSVHelpers.CSVFileHelpers;
@@ -100,9 +98,19 @@ public class MarketService {
     public void CreateAlert(String productName, int target) {
         UserAlertActions.CreateAlert(productName, target);
     }
-    public void testAlert()
+   public List<Graph> filterByStore(String name,String store)
+   {
+       StoreGraph storeGraph=new StoreGraph();
+       return storeGraph.computeGraph(name,store);
+   }
+    public List<Graph> filterByCategory(String name,String category)
     {
-        UserAlertActions ua=new UserAlertActions();
-        ua.notifyUser();
+        CategoryGraph storeGraph=new CategoryGraph();
+        return storeGraph.computeGraph(name,category);
+    }
+    public List<Graph> filterByBrand(String name,String brand)
+    {
+        BrandGraph storeGraph=new BrandGraph();
+        return storeGraph.computeGraph(name,brand);
     }
 }

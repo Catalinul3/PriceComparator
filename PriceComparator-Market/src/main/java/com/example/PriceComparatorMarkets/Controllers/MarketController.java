@@ -1,5 +1,6 @@
 package com.example.PriceComparatorMarkets.Controllers;
 
+import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.Graph;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Service.MarketService;
@@ -92,10 +93,23 @@ public class MarketController {
         List<RegularProduct>list= MarketService.getCurrentCatalog();
         return list;
     }
-    @GetMapping("/testNotify")
-    public void notifyU()
+    @GetMapping("/filterByStore")
+ public List<Graph>filterByStore(String name, String store)
     {
-        service.testAlert();
+        List<Graph>list=service.filterByStore(name, store);
+        return list;
+    }
+    @GetMapping("/filterByCategory")
+    public List<Graph>filterByCategory(String name, String category)
+    {
+        List<Graph>list=service.filterByCategory(name, category);
+        return list;
+    }
+    @GetMapping("/filterByBrand")
+    public List<Graph>filterByBrand(String name, String brand)
+    {
+        List<Graph>list=service.filterByBrand(name, brand);
+        return list;
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.PriceComparatorMarkets.Helpers.CSVHelpers;
 
+import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.Graph;
 import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlert;
+import com.example.PriceComparatorMarkets.DAO.GraphProduct;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.StringHelper;
@@ -32,8 +34,8 @@ public class CSVFileHelpers {
             }
         }
         return products;
-
     }
+
 
     public static List<ProductDiscount> readAllDiscountProducts() {
         List<ProductDiscount> products = new ArrayList<ProductDiscount>();
@@ -54,6 +56,28 @@ public class CSVFileHelpers {
         return products;
     }
 
+  public static List<GraphProduct>readAllGraphProduct()
+  {
+      List<GraphProduct> products = new ArrayList<GraphProduct>();
+      Path relativePath = Paths.get("src/main/java/com/example/PriceComparatorMarkets/DataStores");
+      Path absolutePath = relativePath.toAbsolutePath();
+
+      final File folder = new File(absolutePath.toString());
+      for (final File fileEntry : folder.listFiles()) {
+          List<GraphProduct> currentStore = new ArrayList<GraphProduct>();
+          CSVParserCustom currentFile = new CSVParserCustom();
+          if (fileEntry.getName().contains(".csv")) {
+              Path filePath = absolutePath.resolve(fileEntry.getName());
+              String title = StringHelper.spliter(fileEntry.getName());//obtain store name
+              LocalDate data=StringHelper.getData(fileEntry.getName());
+              currentStore = currentFile.loadGraph(filePath.toString(), title,data);
+              products.addAll(currentStore);
+          }
+      }
+      return products;
+  }
+
+
     private static List<String> newestMarketCatalog() {
         Path relativePath = Paths.get("src/main/java/com/example/PriceComparatorMarkets/DataStores");
         Path absolutePath = relativePath.toAbsolutePath();
@@ -70,10 +94,9 @@ public class CSVFileHelpers {
                 newMarkets.put(title, date);
             }
         }
-        List<String>newestMarkets=new ArrayList<String>();
-        for(String key:newMarkets.keySet())
-        {
-            newestMarkets.add(key+"_"+newMarkets.get(key).toString()+".csv");
+        List<String> newestMarkets = new ArrayList<String>();
+        for (String key : newMarkets.keySet()) {
+            newestMarkets.add(key + "_" + newMarkets.get(key).toString() + ".csv");
         }
         return newestMarkets;
     }
@@ -95,6 +118,7 @@ public class CSVFileHelpers {
         }
         return products;
     }
+
 
 
 

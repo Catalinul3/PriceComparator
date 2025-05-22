@@ -1,13 +1,9 @@
 package com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations;
 
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class UserAlert {
-String productName;
-float target;
+import java.util.List;
 
+public interface IGraph {
+     List<Graph> computeGraph(String filter, String product);
 }

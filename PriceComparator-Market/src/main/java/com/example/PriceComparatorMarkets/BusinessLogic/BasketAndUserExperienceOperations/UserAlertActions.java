@@ -24,8 +24,8 @@ public class UserAlertActions {
     private static Path path;
     private List<UserAlert> alerts;
 
-    public static boolean isDroped(RegularProduct product, int target) {
-        return product.getPrice() > target;
+    public static boolean isDroped(RegularProduct product, float target) {
+        return product.getPrice() < target;
     }
 
     public UserAlertActions() {
@@ -36,20 +36,27 @@ public class UserAlertActions {
 
     }
 
-@Scheduled(cron = "0 0 0 * * * ")
+    @Scheduled(cron = "0 * 17 * * ? ")
     public void notifyUser() {
         List<RegularProduct> currentStore = CSVFileHelpers.findProductOnActualDate();
+        boolean droped = false;
         for (UserAlert alert : alerts) {
             for (RegularProduct product : currentStore) {
                 String englishAlphabeticalProduct = StringHelper.normalize(product.getProductName());
                 if (englishAlphabeticalProduct.contains(alert.getProductName())) {
                     if (isDroped(product, alert.getTarget())) {
+                        droped = true;
                         System.out.println(alert.getProductName() + " is dropped at" + product.getStore());
+                        alerts.remove(alert);
                     }
                 }
             }
         }
-        System.out.println("Hurry up");
+        if (droped) {
+            System.out.println("Hurry up");
+        } else {
+            System.out.println("Products are not below your target :(");
+        }
     }
 
     public static void CreateAlert(String userName, int target) {
