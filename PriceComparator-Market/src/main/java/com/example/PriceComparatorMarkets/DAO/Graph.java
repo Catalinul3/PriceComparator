@@ -1,4 +1,4 @@
-package com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations;
+package com.example.PriceComparatorMarkets.DAO;
 
 import lombok.Getter;
 import lombok.Setter;

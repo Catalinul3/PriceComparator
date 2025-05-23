@@ -1,20 +1,16 @@
-package com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations;
+package com.example.PriceComparatorMarkets.BusinessLogic.UserOperations;
 
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.CSVHelpers.CSVFileHelpers;
 import com.example.PriceComparatorMarkets.Helpers.CSVHelpers.CSVParserCustom;
 import com.example.PriceComparatorMarkets.Helpers.StringHelper;
-import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import org.apache.catalina.User;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

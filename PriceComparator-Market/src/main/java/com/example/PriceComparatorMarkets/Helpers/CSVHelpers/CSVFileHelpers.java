@@ -1,20 +1,16 @@
 package com.example.PriceComparatorMarkets.Helpers.CSVHelpers;
 
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.Graph;
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlert;
 import com.example.PriceComparatorMarkets.DAO.GraphProduct;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.StringHelper;
 
 
-import javax.print.DocFlavor;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CSVFileHelpers {
     public static List<RegularProduct> readAllRegularProducts() {

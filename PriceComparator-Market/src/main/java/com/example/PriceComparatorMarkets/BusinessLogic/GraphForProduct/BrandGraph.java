@@ -1,5 +1,6 @@
-package com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations;
+package com.example.PriceComparatorMarkets.BusinessLogic.GraphForProduct;
 
+import com.example.PriceComparatorMarkets.DAO.Graph;
 import com.example.PriceComparatorMarkets.DAO.GraphProduct;
 import com.example.PriceComparatorMarkets.Helpers.CSVHelpers.CSVFileHelpers;
 import com.example.PriceComparatorMarkets.Helpers.StringHelper;
@@ -7,15 +8,16 @@ import com.example.PriceComparatorMarkets.Helpers.StringHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryGraph {
-    public List<Graph> computeGraph(String productName, String category)
+public class BrandGraph implements IGraph {
+    @Override
+    public List<Graph> computeGraph(String productName, String brand)
     {
         List<GraphProduct>products= CSVFileHelpers.readAllGraphProduct().stream()
                 .filter(
                         pName-> StringHelper.normalize(pName.getProductName()).contains(productName)
                 ).filter(
-                product->StringHelper.normalize(product.getProductCategory()).equals(category.toLowerCase())
-        ).toList();
+                        product->StringHelper.normalize(product.getBrand()).toLowerCase().equals(brand.toLowerCase())
+                ).toList();
         List<Graph>graphs=new ArrayList<Graph>();
         for(GraphProduct graphProduct: products)
         {
@@ -28,3 +30,4 @@ public class CategoryGraph {
         return graphs;
     }
 }
+

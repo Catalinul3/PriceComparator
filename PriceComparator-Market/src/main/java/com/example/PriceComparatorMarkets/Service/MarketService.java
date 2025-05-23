@@ -1,9 +1,13 @@
 package com.example.PriceComparatorMarkets.Service;
 
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.*;
+import com.example.PriceComparatorMarkets.BusinessLogic.BasketOperations.*;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.ActiveDiscount;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.NewDiscount;
-import com.example.PriceComparatorMarkets.DAO.GraphProduct;
+import com.example.PriceComparatorMarkets.BusinessLogic.GraphForProduct.BrandGraph;
+import com.example.PriceComparatorMarkets.BusinessLogic.GraphForProduct.CategoryGraph;
+import com.example.PriceComparatorMarkets.BusinessLogic.GraphForProduct.StoreGraph;
+import com.example.PriceComparatorMarkets.BusinessLogic.UserOperations.UserAlertActions;
+import com.example.PriceComparatorMarkets.DAO.Graph;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.CSVHelpers.CSVFileHelpers;
@@ -20,14 +24,16 @@ import java.util.*;
 public class MarketService {
     private List<RegularProduct> products;
     private List<ProductDiscount> discounts;
-    private BasketProduct basket;
+    private Basket basket;
     private BasketBaseProduct basketBaseProduct;
+    private BasketProduct basketProducts;
 
     public MarketService() {
         products = CSVFileHelpers.readAllRegularProducts();
         discounts = CSVFileHelpers.readAllDiscountProducts();
-        basket = new BasketProduct();
+        basket = new Basket();
         basketBaseProduct = new BasketBaseProduct();
+        basketProducts=new BasketProduct();
     }
 
     public List<RegularProduct> getProducts(String file) {
@@ -75,7 +81,7 @@ public class MarketService {
 
     public Map<String, RegularProduct> findBestDealPerUnit(String[] productsName) {
 
-        Map<String, RegularProduct> bestDeal = basket.bestDeal(productsName, products);
+        Map<String, RegularProduct> bestDeal = basketProducts.bestDeal(productsName, products);
         return bestDeal;
     }
 
@@ -86,19 +92,19 @@ public class MarketService {
     }
 
     public List<RegularProduct> optimizeShoppingList(String[] productsName) {
-        List<RegularProduct> optimizedList = BasketProduct.optimizedList(productsName, products);
+        List<RegularProduct> optimizedList = basket.splitIntoOptimizeShoppingList(productsName, products);
         return optimizedList;
     }
 
     public Map<String, RegularProduct> highlightBestDealProductService() {
-        Map<String, RegularProduct> bestDeal = BasketProduct.highlightBestDealAcrossAllMarkets(products);
+        Map<String, RegularProduct> bestDeal = BestDeal.highlightBestDealAcrossAllMarkets(products);
         return bestDeal;
     }
 
     public void CreateAlert(String productName, int target) {
         UserAlertActions.CreateAlert(productName, target);
     }
-   public List<Graph> filterByStore(String name,String store)
+   public List<Graph> filterByStore(String name, String store)
    {
        StoreGraph storeGraph=new StoreGraph();
        return storeGraph.computeGraph(name,store);

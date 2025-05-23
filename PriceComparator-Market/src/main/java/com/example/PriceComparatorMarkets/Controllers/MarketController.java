@@ -1,6 +1,6 @@
 package com.example.PriceComparatorMarkets.Controllers;
 
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.Graph;
+import com.example.PriceComparatorMarkets.DAO.Graph;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Service.MarketService;

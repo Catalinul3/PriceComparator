@@ -1,5 +1,6 @@
-package com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations;
+package com.example.PriceComparatorMarkets.BusinessLogic.BasketOperations;
 
+import com.example.PriceComparatorMarkets.BusinessLogic.PriceOperations;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.StringHelper;
 
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 
 
-public class BasketBaseProduct extends Basket implements IBasket{
+public class BasketBaseProduct  implements IBasket{
     @Override
     public List<RegularProduct> computeBasket(String[] products, List<RegularProduct> allProducts) {
         List<RegularProduct> basket = allProducts.stream().filter(
@@ -29,8 +30,8 @@ public class BasketBaseProduct extends Basket implements IBasket{
                 RegularProduct::getProductName,
                 product -> product,
                 (oldDeal, newDeal) -> {
-                    float oldPrice=pricePerUnit(oldDeal);
-                    float newPrice=pricePerUnit(newDeal);
+                    float oldPrice= PriceOperations.pricePerUnit(oldDeal);
+                    float newPrice=PriceOperations.pricePerUnit(newDeal);
                     return (oldPrice<newPrice)?oldDeal:newDeal;
                 }
         ));

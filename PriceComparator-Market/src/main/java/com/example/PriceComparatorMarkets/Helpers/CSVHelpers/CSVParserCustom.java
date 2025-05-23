@@ -1,16 +1,13 @@
 package com.example.PriceComparatorMarkets.Helpers.CSVHelpers;
 
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.Graph;
-import com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations.UserAlert;
+import com.example.PriceComparatorMarkets.BusinessLogic.UserOperations.UserAlert;
 import com.example.PriceComparatorMarkets.DAO.GraphProduct;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.Parser;
 import com.opencsv.CSVReader;
-import org.apache.catalina.User;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;

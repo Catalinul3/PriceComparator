@@ -1,4 +1,4 @@
-package com.example.PriceComparatorMarkets.BusinessLogic.BasketAndUserExperienceOperations;
+package com.example.PriceComparatorMarkets.BusinessLogic.BasketOperations;
 
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 
