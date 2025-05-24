@@ -1,15 +1,15 @@
 product_id;product_name;product_category;brand;package_quantity;package_unit;price;currency
 P001;lapte zuzu;lactate;Zuzu;1;l;8.40;RON
 P003;iaurt grecesc;lactate;Olympus;0.35;kg;9.50;RON
-P006;ouă mărimea M;ouă;Ferma Veche;12;buc;10.80;RON
-P009;brânză telemea;lactate;Hochland;0.25;kg;4.90;RON
+P006;ouă mărimea M;ouă;Ferma Veche;12;buc;2.80;RON
+P009;brânză telemea;lactate;Hochland;0.25;kg;10.00;RON
 P012;pâine albă;panificație;K-Classic;450;g;3.50;RON
 P015;roșii cherry;legume și fructe;K-Bio;300;g;7.30;RON
 P018;piept pui;carne;Agricola;0.8;kg;23.80;RON
 P020;spaghetti nr.5;paste făinoase;Barilla;400;g;4.90;RON
 P022;zahăr tos;alimente de bază;Mărgăritar;1;kg;5.30;RON
 P025;apă plată;băuturi;Dorna;1.5;l;5.10;RON
-P027;banane;legume și fructe;Generic;1;kg;6.50;RON
+P027;banane;legume și fructe;Generic;1;kg;0.50;RON
 P030;sandwich cu pâine;produse alimentare;Profi;1;buc;13.40;RON
 P029;ulei floarea-soarelui;alimente de bază;Floriol;0.9;l;9.90;RON
 P032;biscuiți cu unt;gustări;Milka;180;g;7.80;RON
@@ -18,7 +18,7 @@ P038;detergent lichid;produse de menaj;Ariel;2;l;47.60;RON
 P041;șampon păr gras;îngrijire personală;Elseve;500;ml;16.40;RON
 P044;hârtie igienică 3 straturi;produse de menaj;Pufina;8;role;18.20;RON
 P047;piper negru măcinat;condimente;Fuchs;40;g;6.00;RON
-P050;vin alb demisec;băuturi;Recas;0.75;l;25.90;RON
+P050;vin alb demisec;băuturi;Recas;0.75;l;11.90;RON
 P053;ciocolată neagră 70%;gustări;Heidi;80;g;4.20;RON
 P056;cartofi albi;legume și fructe;Generic;1.5;kg;3.90;RON
 P058;ceapă galbenă;legume și fructe;Generic;1;kg;2.30;RON
@@ -28,5 +28,5 @@ P062;cașcaval;lactate;Delaco;0.3;kg;15.90;RON
 P065;cafea instant;cafea;Nescafe;0.1;kg;17.60;RON
 P067;pasta de dinti 3D White;îngrijire personală;Colgate;75;ml;10.20;RON
 P069;snacks tortilla chips;gustări;Doritos;150;g;6.50;RON
-P072;bere blondă;băuturi;Ursus;0.5;l;5.30;RON
+P072;bere blondă;băuturi;Ursus;0.5;l;7.30;RON
 P074;napolitane cu ciocolată;gustări;Joe;180;g;6.10;RON

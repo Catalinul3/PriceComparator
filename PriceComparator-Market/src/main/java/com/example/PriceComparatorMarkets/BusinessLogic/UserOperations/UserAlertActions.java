@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -28,7 +29,7 @@ public class UserAlertActions {
         String pathFile = ALERT_PATH + "/" + ALERT_FILE;
         Path relativePaths = Paths.get(pathFile);
         path = relativePaths.toAbsolutePath();
-        alerts = CSVParserCustom.loadAlert(path.toString());
+        alerts =new ArrayList<UserAlert>();
 
     }
 
@@ -36,6 +37,7 @@ public class UserAlertActions {
     public void notifyUser() {
         List<RegularProduct> currentStore = CSVFileHelpers.findProductOnActualDate();
         boolean droped = false;
+        alerts=CSVParserCustom.loadAlert(path.toString());
         for (UserAlert alert : alerts) {
             for (RegularProduct product : currentStore) {
                 String englishAlphabeticalProduct = StringHelper.normalize(product.getProductName());
@@ -43,7 +45,8 @@ public class UserAlertActions {
                     if (isDroped(product, alert.getTarget())) {
                         droped = true;
                         System.out.println(alert.getProductName() + " is dropped at" + product.getStore());
-                        alerts.remove(alert);
+
+
                     }
                 }
             }

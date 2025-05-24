@@ -20,31 +20,13 @@ public class MarketController {
         service = new MarketService();
     }
 
-    @GetMapping("/getProductsByCSVFile")
-    public List<RegularProduct> getProductFromMarket(String file) { //log.info("getMarketProducts has started ...");
 
-
-        List<RegularProduct> marketProducts = service.getProducts(file);
-        return marketProducts;
-    }
-
-    @GetMapping("/geActivetDiscount")
+    @GetMapping("/geActiveDiscounts")
     public List<ProductDiscount> getActiveDiscount() {
         List<ProductDiscount> discounts = service.getActiveDiscounts();
         return discounts;
     }
 
-    @GetMapping("/getAllProduct")
-    public List<RegularProduct> getAllProductFromAllMarkets() {
-        List<RegularProduct> allProducts = MarketService.readAllRegularProducts();
-        return allProducts;
-    }
-
-    @GetMapping("/getAllDiscounts")
-    public List<ProductDiscount> getAllDiscounts() {
-        List<ProductDiscount> allDiscounts = MarketService.readAllDiscountProducts();
-        return allDiscounts;
-    }
 
     @GetMapping("/bestCurrentActiveDiscount")
     public List<ProductDiscount> getBestCurrentActiveDiscount() {
