@@ -20,6 +20,7 @@ public class UserAlertActions {
     private static final String ALERT_PATH = "src/main/java/com/example/PriceComparatorMarkets/DataAlert";
     private static Path path;
     private List<UserAlert> alerts;
+    private CSVParserCustom parser;
 
     public static boolean isDroped(RegularProduct product, float target) {
         return product.getPrice() < target;
@@ -29,32 +30,37 @@ public class UserAlertActions {
         String pathFile = ALERT_PATH + "/" + ALERT_FILE;
         Path relativePaths = Paths.get(pathFile);
         path = relativePaths.toAbsolutePath();
-        alerts =new ArrayList<UserAlert>();
+        alerts = new ArrayList<UserAlert>();
+        parser = new CSVParserCustom();
 
     }
 
-    @Scheduled(cron = "0 * 17 * * ? ")
+    @Scheduled(cron = "0 * 18 * * ? ")
     public void notifyUser() {
         List<RegularProduct> currentStore = CSVFileHelpers.findProductOnActualDate();
         boolean droped = false;
-        alerts=CSVParserCustom.loadAlert(path.toString());
-        for (UserAlert alert : alerts) {
-            for (RegularProduct product : currentStore) {
-                String englishAlphabeticalProduct = StringHelper.normalize(product.getProductName());
-                if (englishAlphabeticalProduct.contains(alert.getProductName())) {
-                    if (isDroped(product, alert.getTarget())) {
-                        droped = true;
-                        System.out.println(alert.getProductName() + " is dropped at" + product.getStore());
+        alerts = parser.loadAlert(path.toString());
+        if (alerts.size() != 0) {
+            for (UserAlert alert : alerts) {
+                for (RegularProduct product : currentStore) {
+                    String englishAlphabeticalProduct = StringHelper.normalize(product.getProductName());
+                    if (englishAlphabeticalProduct.contains(alert.getProductName())) {
+                        if (isDroped(product, alert.getTarget())) {
+                            droped = true;
+                            System.out.println(alert.getProductName() + " is dropped at" + product.getStore());
+                            parser.removeAlert(path.toString(), alert);
 
 
+                        }
                     }
                 }
             }
         }
         if (droped) {
             System.out.println("Hurry up");
+
         } else {
-            System.out.println("Products are not below your target :(");
+            System.out.println("Price of product is not below target");
         }
     }
 

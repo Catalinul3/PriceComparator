@@ -7,6 +7,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Discount {
-    final static List<ProductDiscount> allDiscountProducts= CSVFileHelpers.readAllDiscountProducts();
-    final static LocalDate today = LocalDate.now();
+     List<ProductDiscount> allDiscountProducts;
+     LocalDate today;
+     public Discount()
+     {
+         allDiscountProducts=CSVFileHelpers.readAllDiscountProducts();
+         today=LocalDate.now();
+     }
 }

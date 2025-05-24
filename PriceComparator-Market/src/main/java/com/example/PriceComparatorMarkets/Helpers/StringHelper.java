@@ -8,6 +8,10 @@ public class StringHelper {
         String[] splitString = title.split("_");
         return splitString[0];
     }
+    public static String splitAlert(String alert) {
+        String[] splitString = alert.split(";");
+        return splitString[0];
+    }
     public static LocalDate getData(String title)
     {
         String[] splitString=title.split("_");

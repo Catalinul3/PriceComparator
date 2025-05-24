@@ -2,6 +2,7 @@ package com.example.PriceComparatorMarkets.Service;
 
 import com.example.PriceComparatorMarkets.BusinessLogic.BasketOperations.*;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.ActiveDiscount;
+import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.Discount;
 import com.example.PriceComparatorMarkets.BusinessLogic.DiscountOperations.NewDiscount;
 import com.example.PriceComparatorMarkets.BusinessLogic.GraphForProduct.BrandGraph;
 import com.example.PriceComparatorMarkets.BusinessLogic.GraphForProduct.CategoryGraph;
@@ -23,14 +24,16 @@ import java.util.*;
 @Service
 public class MarketService {
     private List<RegularProduct> products;
-    private List<ProductDiscount> discounts;
+    private List<RegularProduct>actualProducts;
+    private Discount discount;
     private Basket basket;
     private BasketBaseProduct basketBaseProduct;
     private BasketProduct basketProducts;
 
     public MarketService() {
         products = CSVFileHelpers.readAllRegularProducts();
-        discounts = CSVFileHelpers.readAllDiscountProducts();
+        actualProducts=CSVFileHelpers.findProductOnActualDate();
+        discount=new Discount();
         basket = new Basket();
         basketBaseProduct = new BasketBaseProduct();
         basketProducts=new BasketProduct();
@@ -54,6 +57,7 @@ public class MarketService {
 
     public List<ProductDiscount> getNewlyDiscounts() {
         NewDiscount news = new NewDiscount();
+
         List<ProductDiscount> newDiscounts = news.typeDiscount();
         return newDiscounts;
     }
@@ -81,23 +85,23 @@ public class MarketService {
 
     public Map<String, RegularProduct> findBestDealPerUnit(String[] productsName) {
 
-        Map<String, RegularProduct> bestDeal = basketProducts.bestDeal(productsName, products);
+        Map<String, RegularProduct> bestDeal = basketProducts.bestDeal(productsName, actualProducts);
         return bestDeal;
     }
 
     public List<RegularProduct> computeUserBasketWithBasedProduct(String[] productsName) {
 
-        List<RegularProduct> basedProduct = basketBaseProduct.computeBasket(productsName, products);
+        List<RegularProduct> basedProduct = basketBaseProduct.computeBasket(productsName, actualProducts);
         return basedProduct;
     }
 
     public List<RegularProduct> optimizeShoppingList(String[] productsName) {
-        List<RegularProduct> optimizedList = basket.splitIntoOptimizeShoppingList(productsName, products);
+        List<RegularProduct> optimizedList = basket.splitIntoOptimizeShoppingList(productsName, actualProducts);
         return optimizedList;
     }
 
     public Map<String, RegularProduct> highlightBestDealProductService() {
-        Map<String, RegularProduct> bestDeal = BestDeal.highlightBestDealAcrossAllMarkets(products);
+        Map<String, RegularProduct> bestDeal = BestDeal.highlightBestDealAcrossAllMarkets(actualProducts);
         return bestDeal;
     }
 

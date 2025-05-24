@@ -5,9 +5,12 @@ import com.example.PriceComparatorMarkets.DAO.GraphProduct;
 import com.example.PriceComparatorMarkets.DAO.ProductDiscount;
 import com.example.PriceComparatorMarkets.DAO.RegularProduct;
 import com.example.PriceComparatorMarkets.Helpers.Parser;
+import com.example.PriceComparatorMarkets.Helpers.StringHelper;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
@@ -79,12 +82,11 @@ public class CSVParserCustom implements Parser {
         return marketProduct;
     }
 
-    public static List<UserAlert> loadAlert(String file) {
+    public List<UserAlert> loadAlert(String file) {
         List<UserAlert> alerts = new ArrayList<UserAlert>();
         try {
             FileReader fileReader = new FileReader(file);
             CSVReader csvReader = new CSVReader(fileReader);
-            csvReader.readNext();
             String[] next;
 
             while ((next = csvReader.readNext()) != null) {
@@ -134,6 +136,24 @@ public class CSVParserCustom implements Parser {
             e.printStackTrace();
         }
         return dicountProducts;
+    }
+
+    public void removeAlert(String file, UserAlert alert) {
+        try {
+            FileReader fileReader = new FileReader(file);
+            CSVReader csvReader = new CSVReader(fileReader);
+            List<String[]>allAlerts=csvReader.readAll();
+            List<String[]>newAlertFile=allAlerts.stream().filter(
+                    noRepetitive->!alert.getProductName().equals(StringHelper.splitAlert(noRepetitive[0]))
+            ).toList();
+            FileWriter sw=new FileWriter(file);
+            CSVWriter writer=new CSVWriter(sw,';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+            writer.writeAll(newAlertFile);
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
